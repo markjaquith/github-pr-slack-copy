@@ -17,5 +17,5 @@ if (!result.success) {
 const code = await result.outputs[0].text();
 const bookmarklet = 'javascript:' + code.trim();
 
-writeFileSync('GitHub PR Slack Clipboard Bookmarklet', bookmarklet);
+writeFileSync('0000 GitHub PR Slack Clipboard Bookmarklet', bookmarklet);
 console.log('Built bookmarklet:', bookmarklet.length, 'bytes');

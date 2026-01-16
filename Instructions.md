@@ -16,4 +16,4 @@ The bookmarklet source code is in `bookmarklet.ts`. To make changes:
 
 1. Edit `bookmarklet.ts`
 2. Run `./build.ts` (requires [Bun](https://bun.sh))
-3. The minified bookmarklet will be written to `GitHub PR Slack Clipboard Bookmarklet`
+3. The minified bookmarklet will be written to `0000 GitHub PR Slack Clipboard Bookmarklet`
