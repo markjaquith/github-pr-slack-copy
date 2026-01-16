@@ -9,3 +9,11 @@
 **Alternative:** Create any bookmark, then edit it and replace the URL with the bookmarklet code.
 
 > Bookmarks bar not visible? Press `Ctrl+Shift+B` (Windows/Linux) or `Cmd+Shift+B` (Mac).
+
+## Editing the Bookmarklet
+
+The bookmarklet source code is in `bookmarklet.ts`. To make changes:
+
+1. Edit `bookmarklet.ts`
+2. Run `./build.ts` (requires [Bun](https://bun.sh))
+3. The minified bookmarklet will be written to `GitHub PR Slack Clipboard Bookmarklet`
