@@ -1,5 +1,5 @@
 ;(function () {
-	const h1 = document.querySelector("h1.gh-header-title")
+	const h1 = document.querySelector('h1[data-component="PH_Title"]')
 
 	function showToast(message: string, isError?: boolean): void {
 		const existingToast = document.getElementById("__bookmarklet_toast__")
@@ -99,7 +99,7 @@
 	}
 
 	if (!h1) {
-		showToast("No GitHub .gh-header-title found", true)
+		showToast("No GitHub PR title found", true)
 		return
 	}
 
