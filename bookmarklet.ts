@@ -103,7 +103,7 @@
 		return
 	}
 
-	const isDraft = !!document.querySelector('span[reviewable_state="draft"]')
+	const isDraft = !!document.querySelector('span[data-status="draft"]')
 	const emoji = isDraft ? ":draft:" : ":pr:"
 
 	const title = (h1.textContent ?? "")
