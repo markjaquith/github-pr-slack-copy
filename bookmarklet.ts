@@ -1,5 +1,7 @@
 ;(function () {
-	const h1 = document.querySelector('h1[data-component="PH_Title"]')
+	const h1 =
+		document.querySelector("h1.gh-header-title") ??
+		document.querySelector('h1[data-component="PH_Title"]')
 
 	function showToast(message: string, isError?: boolean): void {
 		const existingToast = document.getElementById("__bookmarklet_toast__")
