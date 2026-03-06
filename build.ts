@@ -1,14 +1,19 @@
 #!/usr/bin/env bun
-import { mkdirSync, readFileSync, writeFileSync } from "fs"
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "fs"
 
 const OUTPUT_FILE = "github-pr-slack-copy.bookmarklet"
 const SITE_DIR = "docs"
 const SITE_INDEX_FILE = SITE_DIR + "/index.html"
 const SITE_NOJEKYLL_FILE = SITE_DIR + "/.nojekyll"
 const SITE_SOURCE_DIR = "site"
+const SITE_URL = "https://markjaquith.github.io/github-pr-slack-copy/"
 const SITE_TEMPLATE_FILE = SITE_SOURCE_DIR + "/index.html"
 const SITE_STYLES_FILE = SITE_SOURCE_DIR + "/styles.css"
 const SITE_SCRIPT_FILE = SITE_SOURCE_DIR + "/site.js"
+const SITE_ASSETS_DIR = SITE_SOURCE_DIR + "/assets"
+const SITE_OUTPUT_ASSETS_DIR = SITE_DIR + "/assets"
+const SOCIAL_IMAGE_FILE = "social-share.png"
+const SOCIAL_IMAGE_PATH = "assets/" + SOCIAL_IMAGE_FILE
 
 function escapeHtml(value: string): string {
 	return value
@@ -41,10 +46,12 @@ function buildSiteHtml(bookmarklet: string): string {
 	}).trim()
 
 	return renderTemplate(htmlTemplate, {
+		"{{SITE_URL}}": SITE_URL,
 		"{{BOOKMARKLET_HREF}}": bookmarkletHref,
 		"{{COPYRIGHT_YEARS}}": copyrightYears,
 		"{{SITE_CSS}}": css,
 		"{{SITE_JS}}": script,
+		"{{SOCIAL_IMAGE_URL}}": SITE_URL + SOCIAL_IMAGE_PATH,
 	})
 }
 
@@ -66,6 +73,8 @@ const bookmarklet = "javascript:" + code.trim()
 
 writeFileSync(OUTPUT_FILE, bookmarklet)
 mkdirSync(SITE_DIR, { recursive: true })
+mkdirSync(SITE_OUTPUT_ASSETS_DIR, { recursive: true })
+copyFileSync(SITE_ASSETS_DIR + "/" + SOCIAL_IMAGE_FILE, SITE_OUTPUT_ASSETS_DIR + "/" + SOCIAL_IMAGE_FILE)
 writeFileSync(SITE_INDEX_FILE, buildSiteHtml(bookmarklet))
 writeFileSync(SITE_NOJEKYLL_FILE, "")
 
