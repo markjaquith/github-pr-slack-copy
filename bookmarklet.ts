@@ -1,3 +1,5 @@
+import { normalizePrTitle } from "./title"
+
 ;(function () {
 	const h1 =
 		document.querySelector("h1.gh-header-title") ??
@@ -108,11 +110,7 @@
 	const isDraft = !!document.querySelector('span[data-status="draft"]')
 	const emoji = isDraft ? ":draft:" : ":pr:"
 
-	const title = (h1.textContent ?? "")
-		.replace(/\n/g, " ")
-		.replace(/\s*#\d+\s*$/, "")
-		.replace(/\s+/g, " ")
-		.trim()
+	const title = normalizePrTitle(h1.textContent ?? "")
 
 	const markdown = emoji + " [" + title + "](" + location.href + ")"
 	const html =
