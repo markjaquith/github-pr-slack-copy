@@ -1,0 +1,717 @@
+    :root {
+      --bg: #f7f1e8;
+      --bg-accent: #efe2cf;
+      --surface: rgba(255, 251, 245, 0.88);
+      --surface-strong: #fffdf8;
+      --text: #1f1b16;
+      --muted: #64584a;
+      --border: rgba(74, 54, 33, 0.14);
+      --shadow: 0 24px 60px rgba(72, 47, 24, 0.12);
+      --accent: #bb4d00;
+      --accent-strong: #923600;
+      --accent-soft: #fff0e4;
+      --success: #23593d;
+      --code-bg: #f2e8da;
+      --max: 1120px;
+      --radius: 24px;
+      --radius-sm: 16px;
+      --sans: "Avenir Next", "Segoe UI", sans-serif;
+      --display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      scroll-behavior: smooth;
+      background: #f4ede3;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--text);
+      background: #f4ede3;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    code {
+      font-family: "SFMono-Regular", "Menlo", monospace;
+      font-size: 0.95em;
+      background: var(--code-bg);
+      border-radius: 0.45rem;
+      padding: 0.12rem 0.35rem;
+    }
+
+    .page {
+      width: min(calc(100% - 2rem), var(--max));
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 32px 0 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .github-corner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 5;
+      color: #fffaf3;
+    }
+
+    .github-corner svg {
+      display: block;
+      width: 88px;
+      height: 88px;
+    }
+
+    .github-corner .octo-arm {
+      transform-origin: 130px 106px;
+    }
+
+    .github-corner:hover .octo-arm,
+    .github-corner:focus-visible .octo-arm {
+      animation: octocat-wave 560ms ease-in-out;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 4vw, 56px);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 8px);
+      background: linear-gradient(145deg, rgba(255, 250, 244, 0.96), rgba(248, 237, 221, 0.96));
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -120px -140px auto;
+      width: 340px;
+      height: 340px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(187, 77, 0, 0.16), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      gap: 22px;
+      align-items: start;
+      grid-template-areas:
+        "intro"
+        "actions"
+        "note"
+        "preview";
+      z-index: 1;
+    }
+
+    .hero-arrow-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .hero-intro {
+      grid-area: intro;
+      position: relative;
+      z-index: 2;
+      max-width: 42rem;
+    }
+
+    .hero-actions {
+      grid-area: actions;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      align-content: start;
+      justify-items: start;
+      gap: 0.8rem;
+      min-height: 100%;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 48rem;
+      margin: 1rem 0 0;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 0;
+    }
+
+    .bookmarklet-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.02rem;
+    }
+
+    .drag-note {
+      margin: 0;
+      font-size: 0.78rem;
+      color: #b9afa3;
+      text-align: center;
+      transform: translateY(-4px);
+    }
+
+    .copy-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+    }
+
+    .copy-label {
+      margin: 0;
+      font-size: 0.92rem;
+      color: #b9afa3;
+      transform: translateY(-6px);
+    }
+
+    .bookmarklet-link,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0.95rem 1.25rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .bookmarklet-link {
+      background: linear-gradient(135deg, var(--accent) 0%, #d6640f 100%);
+      color: #fff8f2;
+      box-shadow: 0 16px 30px rgba(187, 77, 0, 0.28);
+      cursor: grab;
+    }
+
+    .button {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text);
+      border-color: rgba(74, 54, 33, 0.12);
+      box-shadow: 0 10px 24px rgba(50, 34, 16, 0.08);
+      cursor: pointer;
+    }
+
+    .bookmarklet-link:hover,
+    .bookmarklet-link:focus-visible,
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .bookmarklet-link:focus-visible,
+    .button:focus-visible {
+      outline: 3px solid rgba(187, 77, 0, 0.25);
+      outline-offset: 3px;
+    }
+
+    .note {
+      grid-area: note;
+      margin: 0;
+      padding: 0.85rem 1rem;
+      border-left: 4px solid rgba(187, 77, 0, 0.45);
+      border-radius: 0 14px 14px 0;
+      background: rgba(255, 255, 255, 0.46);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-style: italic;
+    }
+
+    .hero p.note {
+      font-size: 1rem;
+    }
+
+    .slack-preview {
+      grid-area: preview;
+      margin: 0;
+      padding: 18px;
+      border: 1px solid rgba(74, 54, 33, 0.1);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .slack-preview h2 {
+      margin: 0 0 0.85rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .slack-layout {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      column-gap: 0.85rem;
+      row-gap: 0.18rem;
+      align-items: start;
+    }
+
+    .slack-meta {
+      display: contents;
+    }
+
+    .slack-avatar {
+      grid-column: 1;
+      grid-row: 1 / span 3;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #e7e7e7;
+      overflow: hidden;
+      flex: 0 0 48px;
+      box-shadow: inset 0 0 0 1px rgba(74, 54, 33, 0.08);
+    }
+
+    .slack-avatar svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .slack-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .slack-meta-line {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      min-width: 0;
+      padding-top: 0.08rem;
+    }
+
+    .slack-name {
+      font-size: 1.01rem;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #1d1c1d;
+    }
+
+    .slack-time {
+      font-size: 0.88rem;
+      color: #616061;
+    }
+
+    .slack-line {
+      grid-column: 2;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.45rem;
+      padding: 0.08rem 0;
+      min-width: 0;
+    }
+
+    .slack-line + .slack-line {
+      margin-top: 0.05rem;
+    }
+
+    .slack-line.is-pr {
+      grid-row: 2;
+    }
+
+    .slack-line.is-draft {
+      grid-row: 3;
+    }
+
+    .slack-emoji {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      color: #1a7f37;
+      margin-top: 0.02rem;
+      transform: translateY(-1px);
+    }
+
+    .slack-emoji.is-draft {
+      color: #6e7781;
+    }
+
+    .slack-emoji svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      fill: currentColor;
+    }
+
+    .slack-link {
+      color: #1264a3;
+      font-size: 1rem;
+      line-height: 1.35;
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hero-arrow {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      display: none;
+    }
+
+    #hero-arrow-path {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 10 14;
+      opacity: 0.9;
+    }
+
+    #hero-arrow-head {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .card {
+      padding: clamp(20px, 3vw, 28px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 18px 34px rgba(79, 56, 29, 0.08);
+      backdrop-filter: blur(10px);
+      min-width: 0;
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0 0 0.85rem;
+      font-family: var(--display);
+      letter-spacing: -0.03em;
+    }
+
+    .card h2 { font-size: clamp(1.65rem, 4vw, 2.2rem); }
+    .card h3 { font-size: 1.25rem; }
+
+    .steps {
+      counter-reset: steps;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      position: relative;
+      min-height: 2rem;
+      padding-left: 2.85rem;
+    }
+
+    .steps li::before {
+      content: counter(steps);
+      counter-increment: steps;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff8f2;
+      font-weight: 600;
+      font-size: 0.84rem;
+      line-height: 1;
+    }
+
+    .steps li + li { margin-top: 0.7rem; }
+
+    .detail-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .detail strong {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .detail ul {
+      margin: 0.3rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail li {
+      position: relative;
+      padding-left: 1.35rem;
+    }
+
+    .detail li + li {
+      margin-top: 0.45rem;
+    }
+
+    .detail li::before {
+      content: "";
+      position: absolute;
+      top: 0.08rem;
+      left: 0;
+      width: 1.12rem;
+      height: 1.12rem;
+      background: no-repeat center / contain;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb4d00' d='M6.2 12.5 2.35 8.65 4.15 6.85 6.2 8.9 11.8 3.3l1.8 1.8z'/%3E%3C/svg%3E");
+    }
+
+    .status {
+      min-height: 1.4rem;
+      margin: 0;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .footer {
+      margin-top: auto;
+      padding-top: 44px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 639px) {
+      .page {
+        width: min(calc(100% - 1rem), var(--max));
+        padding: 16px 0 12px;
+      }
+
+      .hero {
+        padding: 22px;
+        border-radius: 28px;
+      }
+
+      .hero-grid {
+        gap: 16px;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.9rem, 11vw, 2.85rem);
+      }
+
+      .note {
+        margin-top: 0.15rem;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+      }
+
+      .bookmarklet-stack {
+        width: 100%;
+        align-items: stretch;
+      }
+
+      .bookmarklet-link,
+      .button {
+        width: 100%;
+      }
+
+      .copy-row {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+        margin-top: 0.2rem;
+      }
+
+      .copy-label {
+        text-align: center;
+        transform: none;
+      }
+
+      .hero-actions {
+        justify-items: stretch;
+        gap: 0.35rem;
+      }
+
+      .drag-note {
+        transform: none;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .slack-preview {
+        margin-top: 0.1rem;
+        padding: 16px;
+      }
+
+      .slack-meta {
+        align-items: center;
+      }
+
+      .slack-name {
+        font-size: 0.9rem;
+      }
+
+      .slack-time {
+        font-size: 0.82rem;
+      }
+
+      .slack-line {
+        align-items: flex-start;
+      }
+
+      .slack-layout {
+        grid-template-columns: 40px minmax(0, 1fr);
+        column-gap: 0.7rem;
+      }
+
+      .slack-link {
+        white-space: normal;
+      }
+
+    }
+
+    @media (min-width: 640px) and (max-width: 899px) {
+      .hero-actions {
+        justify-items: center;
+        margin-top: 0.9rem;
+      }
+
+      .cta-row {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .bookmarklet-stack {
+        align-items: center;
+      }
+
+      .copy-row {
+        margin-top: 0;
+        padding-top: 0.1rem;
+      }
+
+      .note {
+        margin-top: 0;
+      }
+
+      .slack-preview {
+        margin-top: -0.2rem;
+      }
+
+      .hero-actions .status {
+        text-align: center;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero h1 {
+        font-size: clamp(2.16rem, 5.4vw, 3.96rem);
+      }
+
+      .hero-grid {
+        grid-template-columns: repeat(24, minmax(0, 1fr));
+        grid-template-areas: none;
+        column-gap: 28px;
+        row-gap: 20px;
+      }
+
+      .hero-intro {
+        grid-column: 1 / 16;
+        grid-row: 1;
+        padding: 0 4rem 0 0;
+      }
+
+      .hero-actions {
+        grid-column: 16 / 25;
+        grid-row: 1;
+        justify-items: end;
+        align-self: start;
+        padding: 2rem 0 0 1rem;
+      }
+
+      .slack-preview {
+        grid-column: 1 / 11;
+        grid-row: 2;
+      }
+
+      .note {
+        grid-column: 12 / 25;
+        grid-row: 2;
+        align-self: start;
+        margin-top: 0.35rem;
+      }
+
+      .hero-actions .cta-row {
+        align-items: flex-end;
+      }
+
+      .section-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto 1fr;
+        align-items: start;
+      }
+
+      .section-grid > .card {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 2;
+      }
+
+      .section-grid > .card > .card-body {
+        min-height: 100%;
+      }
+
+      .hero-arrow {
+        display: block;
+      }
+    }
+
+    @keyframes octocat-wave {
+      0%, 100% { transform: rotate(0deg); }
+      20%, 60% { transform: rotate(-25deg); }
+      40%, 80% { transform: rotate(10deg); }
+    }

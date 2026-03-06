@@ -24,4 +24,4 @@ jobs:
       - name: Rebuild bookmarklet outputs
         run: bun build.ts
       - name: Verify generated outputs are committed
-        run: git diff --exit-code -- "github-pr-slack-copy.bookmarklet"
+        run: git diff --exit-code -- "github-pr-slack-copy.bookmarklet" "docs/index.html" "docs/.nojekyll"

@@ -21,8 +21,13 @@ A tiny Bun-powered bookmarklet that copies the current GitHub pull request as a 
 This writes the bookmarklet URL to:
 
 - `github-pr-slack-copy.bookmarklet`
+- `docs/index.html` for the GitHub Pages install site
 
 ## Install
+
+The easiest install flow is the GitHub Pages site: drag the generated `GitHub PR Slack Copy` link from `docs/index.html` to your bookmarks bar.
+
+Manual install:
 
 1. Run `./build.ts`.
 2. Copy the contents of `github-pr-slack-copy.bookmarklet`.
@@ -51,7 +56,8 @@ bun test
 ## Automation
 
 - CI runs tests on pushes and pull requests.
-- CI rebuilds the bookmarklet and fails if `github-pr-slack-copy.bookmarklet` is out of sync.
+- CI rebuilds the bookmarklet and Pages output, and fails if generated files are out of sync.
+- GitHub Pages deploys the `docs/` site from `main`.
 - A daily workflow checks a live public GitHub pull request page and opens or updates an issue if GitHub's HTML changes in a way that breaks selector detection.
 
 ## Repo notes
