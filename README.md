@@ -2,8 +2,6 @@
 
 A tiny Bun-powered bookmarklet that copies the current GitHub pull request as a Slack-friendly link.
 
-It preserves the original Gist-compatible output file name while also generating a nicer repo-friendly file name.
-
 ## What it copies
 
 - `:pr: [Title](https://github.com/org/repo/pull/123)`
@@ -22,16 +20,27 @@ It preserves the original Gist-compatible output file name while also generating
 
 This writes the bookmarklet URL to:
 
-- `0000 GitHub PR Slack Clipboard Bookmarklet`
 - `github-pr-slack-copy.bookmarklet`
 
 ## Install
 
 1. Run `./build.ts`.
-2. Copy the contents of one of the generated bookmarklet files.
+2. Copy the contents of `github-pr-slack-copy.bookmarklet`.
 3. Create or edit a browser bookmark.
 4. Paste the bookmarklet into the bookmark URL field.
 5. Visit a GitHub pull request page and click the bookmark.
+
+Alternative: create any bookmark first, then edit it and replace the URL with the bookmarklet code.
+
+Bookmarks bar not visible? Press `Ctrl+Shift+B` on Windows/Linux or `Cmd+Shift+B` on Mac.
+
+## Editing
+
+The source bookmarklet lives in `bookmarklet.ts`.
+
+1. Edit `bookmarklet.ts`.
+2. Run `./build.ts`.
+3. The generated bookmarklet will be written to `github-pr-slack-copy.bookmarklet`.
 
 ## Test
 
@@ -39,8 +48,13 @@ This writes the bookmarklet URL to:
 bun test
 ```
 
+## Automation
+
+- CI runs tests on pushes and pull requests.
+- CI rebuilds the bookmarklet and fails if `github-pr-slack-copy.bookmarklet` is out of sync.
+- A daily workflow checks a live public GitHub pull request page and opens or updates an issue if GitHub's HTML changes in a way that breaks selector detection.
+
 ## Repo notes
 
-- `origin` can continue pointing at the original Gist remote.
-- A second remote can point at the full GitHub repository.
-- GitHub Actions runs tests, verifies generated bookmarklet output stays in sync, and checks a public pull request page daily for markup changes that could break selector detection.
+- `origin` points at the full GitHub repository.
+- `gist` points at the legacy Gist redirect.

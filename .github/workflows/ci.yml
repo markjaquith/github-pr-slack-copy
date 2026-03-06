@@ -24,4 +24,4 @@ jobs:
       - name: Rebuild bookmarklet outputs
         run: bun build.ts
       - name: Verify generated outputs are committed
-        run: git diff --exit-code -- "0000 GitHub PR Slack Clipboard Bookmarklet" "github-pr-slack-copy.bookmarklet"
+        run: git diff --exit-code -- "github-pr-slack-copy.bookmarklet"

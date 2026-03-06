@@ -1,10 +1,7 @@
 #!/usr/bin/env bun
 import { writeFileSync } from "fs"
 
-const OUTPUT_FILES = [
-	"0000 GitHub PR Slack Clipboard Bookmarklet",
-	"github-pr-slack-copy.bookmarklet",
-] as const
+const OUTPUT_FILE = "github-pr-slack-copy.bookmarklet"
 
 const result = await Bun.build({
 	entrypoints: ["bookmarklet.ts"],
@@ -22,13 +19,6 @@ if (!result.success) {
 const code = await result.outputs[0].text()
 const bookmarklet = "javascript:" + code.trim()
 
-for (const outputFile of OUTPUT_FILES) {
-	writeFileSync(outputFile, bookmarklet)
-}
+writeFileSync(OUTPUT_FILE, bookmarklet)
 
-console.log(
-	"Built bookmarklet:",
-	bookmarklet.length,
-	"bytes ->",
-	OUTPUT_FILES.join(", "),
-)
+console.log("Built bookmarklet:", bookmarklet.length, "bytes ->", OUTPUT_FILE)
