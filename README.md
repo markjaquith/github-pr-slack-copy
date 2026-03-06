@@ -7,7 +7,7 @@ A tiny Bun-powered bookmarklet that copies the current GitHub pull request as a 
 - `:pr: [Title](https://github.com/org/repo/pull/123)`
 - `:draft: [Title](https://github.com/org/repo/pull/123)` for draft pull requests
 
-## Requirements
+## Development Requirements
 
 - [Bun](https://bun.sh)
 - A browser with bookmarklets enabled
