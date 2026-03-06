@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Run tests
+        run: bun test
+
+  generated-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Rebuild bookmarklet outputs
+        run: bun build.ts
+      - name: Verify generated outputs are committed
+        run: git diff --exit-code -- "0000 GitHub PR Slack Clipboard Bookmarklet" "github-pr-slack-copy.bookmarklet"

@@ -1,9 +1,8 @@
 import { normalizePrTitle } from "./title"
+import { findPrTitleElement, isDraftPullRequest, looksLikePullRequestPage } from "./github-pr-page"
 
 ;(function () {
-	const h1 =
-		document.querySelector("h1.gh-header-title") ??
-		document.querySelector('h1[data-component="PH_Title"]')
+	const h1 = findPrTitleElement(document)
 
 	function showToast(message: string, isError?: boolean): void {
 		const existingToast = document.getElementById("__bookmarklet_toast__")
@@ -102,12 +101,17 @@ import { normalizePrTitle } from "./title"
 		return str.replace(/[&<>"']/g, (char) => escapeMap[char])
 	}
 
-	if (!h1) {
-		showToast("No GitHub PR title found", true)
+	if (!looksLikePullRequestPage(location.href)) {
+		showToast("Open a GitHub pull request page first", true)
 		return
 	}
 
-	const isDraft = !!document.querySelector('span[data-status="draft"]')
+	if (!h1) {
+		showToast("Could not find the pull request title on this page", true)
+		return
+	}
+
+	const isDraft = isDraftPullRequest(document)
 	const emoji = isDraft ? ":draft:" : ":pr:"
 
 	const title = normalizePrTitle(h1.textContent ?? "")
